@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize"
+import { DataTypes, Model, Sequelize } from "sequelize"
 import * as config from "./../config/index.js"
 
 const { DB, USER, PASSWORD,HOST } = config.default;
@@ -7,7 +7,6 @@ const { DB, USER, PASSWORD,HOST } = config.default;
 const sequelize = new Sequelize(DB, USER, PASSWORD, {
   port:3306,
   logging:false,
- 
   pool: {
     maxConnections: 5,
     maxIdleTime: 30
@@ -24,3 +23,15 @@ try {
 } catch (error) {
   console.log('DB Error While Connect',error)
 }
+
+
+// import databases
+import User from "./user.js"
+import Contact from "./contact.js"
+
+
+User(sequelize, DataTypes, Model)
+Contact(sequelize, DataTypes, Model)
+
+
+export { sequelize }
